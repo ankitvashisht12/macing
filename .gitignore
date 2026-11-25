@@ -1,0 +1,4 @@
+.DS_Store
+/Macing.app/
+/homebrew-macing/
+.env*
