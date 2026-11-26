@@ -49,7 +49,8 @@ export default function Home() {
       <section className="issue-help" aria-labelledby="facing-an-issue">
         <div>
           <h2 id="facing-an-issue">Facing an issue?</h2>
-          <p>I don’t have an Apple Developer ID yet, so this download doesn’t have an Apple-verified signature. The first time you open Macing, macOS may show <strong>“Macing” Not Opened</strong>.</p>
+          <p>When you open an app downloaded outside the Mac App Store, macOS checks its Developer ID signature and whether Apple has scanned the build for known malware. This scan is called notarization. Both steps require an Apple Developer Program membership. I don’t have one yet, so macOS may show <strong>“Macing” Not Opened</strong> the first time you launch it. If you choose <strong>Open Anyway</strong>, macOS remembers your choice for that copy.</p>
+          <p>I built Macing to play a sound when you press a key. It uses Input Monitoring to detect key presses and does not save what you type. The <a href="https://github.com/ankitvashisht12/macing">source code is public</a>. You can read it yourself, ask a tool to help explain or review it, or build the app yourself using the steps below.</p>
         </div>
         <div className="issue-options">
           <div>
