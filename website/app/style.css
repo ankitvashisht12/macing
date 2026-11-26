@@ -59,6 +59,13 @@ p { color: var(--muted); font-size: 1.08rem; line-height: 1.6; margin: 1rem 0; }
 .download-link { display: inline-flex; align-items: center; min-height: 44px; padding: .65rem 1.1rem; border-radius: .5rem; background: var(--button-fill); color: #fff9f0; font-weight: 650; text-decoration: none; }
 .download-link:hover { background: var(--button-hover); }
 .sounds-link { font-weight: 650; }
+.brew-install { width: fit-content; max-width: 100%; margin: 1rem auto 0; }
+.brew-command { display: flex; align-items: center; gap: .5rem; padding-inline-start: .8rem; border: 1px solid var(--line); border-radius: .5rem; background: var(--code-surface); text-align: left; }
+.brew-command code { font-family: var(--font-geist-mono), monospace; font-size: .85rem; overflow-wrap: anywhere; }
+.brew-command button { display: grid; place-items: center; flex: 0 0 44px; min-height: 44px; padding: 0; color: inherit; background: transparent; border: 0; border-inline-start: 1px solid var(--line); border-radius: 0 .5rem .5rem 0; cursor: pointer; }
+.brew-command button:hover { color: var(--orange); }
+.copy-status { display: block; margin-top: .35rem; color: var(--muted); font-size: .8rem; }
+
 .hero .download-note { margin-top: .75rem; font-size: .85rem; }
 .issue-link { display: inline-block; margin-top: .55rem; color: var(--orange); font-size: .9rem; font-weight: 650; }
 .install-help { width: fit-content; max-width: min(100%, 54ch); margin: .8rem auto 0; font-size: .9rem; line-height: 1.55; }
