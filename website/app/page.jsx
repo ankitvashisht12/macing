@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { Github, Volume2 } from 'lucide-react';
 import ThemeToggle from './theme-toggle';
 import Demo from './demo';
-import Download from './download';
+import Download, { HomebrewCommand } from './download';
 
 export default function Home() {
   return <div className="shell" id="top">
@@ -19,6 +19,7 @@ export default function Home() {
     </header>
     <main>
       <section className="hero">
+        <a className="hero-badge" href="https://github.com/ankitvashisht12/macing">Free · Open Source</a>
         <h1>
           <span className="hero-line">
             Mechanical{' '}
@@ -46,28 +47,53 @@ export default function Home() {
         </div>
       </section>
       <Demo />
-      <section className="issue-help" aria-labelledby="facing-an-issue">
-        <div>
-          <h2 id="facing-an-issue">Facing an issue?</h2>
-          <p>When you open an app downloaded outside the Mac App Store, macOS checks its Developer ID signature and whether Apple has scanned the build for known malware. This scan is called notarization. Both steps require an Apple Developer Program membership. I don’t have one yet, so macOS may show <strong>“Macing” Not Opened</strong> the first time you launch it. If you choose <strong>Open Anyway</strong>, macOS remembers your choice for that copy.</p>
-          <p>I built Macing to play a sound when you press a key. It uses Input Monitoring to detect key presses and does not save what you type. The <a href="https://github.com/ankitvashisht12/macing">source code is public</a>. You can read it yourself, ask a tool to help explain or review it, or build the app yourself using the steps below.</p>
+      <section className="installation" aria-labelledby="installation">
+        <h2 id="installation">Installation steps</h2>
+        <div className="install-method">
+          <h3>Install with Homebrew</h3>
+          <p>With Homebrew installed, paste this command into Terminal to build and open Macing.</p>
+          <HomebrewCommand />
+          <h4 id="input-monitoring">Set up Input Monitoring</h4>
+          <p>Both install methods need this permission. Macing uses it to play sounds when you press a key and does not save what you type.</p>
+          <ol className="setup-steps">
+            <li>
+              <p>Choose <strong>Open System Settings</strong> when macOS asks.</p>
+              <Image src="/setup/keystroke-prompt.png" alt="Macing’s Keystroke Receiving prompt" width={942} height={378} />
+            </li>
+            <li>
+              <p>Turn on <strong>Macing</strong> in Input Monitoring.</p>
+              <Image src="/setup/input-monitoring.png" alt="Input Monitoring with Macing turned on" width={990} height={470} />
+            </li>
+            <li>
+              <p>If prompted, choose <strong>Quit &amp; Reopen</strong>. Then <a href="#configure-sounds">configure your sounds</a>.</p>
+              <Image src="/setup/quit-and-reopen.png" alt="The macOS prompt with the Quit & Reopen button" width={540} height={460} />
+            </li>
+          </ol>
         </div>
-        <div className="issue-options">
-          <div>
-            <h3>Open the downloaded app</h3>
-            <ol>
-              <li>Open Macing from <strong>Applications</strong>. If you see the warning, click <strong>Done</strong>.</li>
-              <li>In <strong>System Settings → Privacy &amp; Security</strong>, scroll to <strong>Security</strong>, click <strong>Open Anyway</strong> for Macing, and confirm.</li>
-            </ol>
-            <a className="settings-link" href="x-apple.systempreferences:com.apple.settings.PrivacySecurity.extension">
-              Open Privacy &amp; Security
-            </a>
-          </div>
-          <div>
-            <h3>Build Macing from source</h3>
-            <p>I’m sharing the source so you can read it and build Macing on your Mac. <a href="/Macing-source.zip" download>Download the source ZIP</a> and unzip it. With Apple’s Command Line Tools installed, open the extracted folder in Terminal and run these commands.</p>
-            <pre><code>{'./build.sh\nopen Macing.app'}</code></pre>
-          </div>
+        <div className="install-method">
+          <h3>Build from source</h3>
+          <p><a href="/Macing-source.zip" download>Download the source ZIP</a> and unzip it. With Apple’s Command Line Tools installed, open the extracted folder in Terminal and run:</p>
+          <pre><code>{'./build.sh\nopen Macing.app'}</code></pre>
+          <p>Then follow the <a href="#input-monitoring">Input Monitoring steps</a> above.</p>
+        </div>
+      </section>
+      <section className="configure-sounds" aria-labelledby="configure-sounds">
+        <h2 id="configure-sounds">Configure your sounds</h2>
+        <div className="sound-settings">
+          <figure>
+            <figcaption>
+              <h3>Choose a keyboard pack</h3>
+              <p>Click the keyboard icon in your Mac’s menu bar. Open <strong>Keyboard Pack</strong> to choose a pack, or use <strong>Typing Sounds</strong> to turn playback on or off.</p>
+            </figcaption>
+            <Image src="/setup/macing-menu.png" alt="Macing menu showing Typing Sounds and the Halo keyboard pack" width={526} height={436} />
+          </figure>
+          <figure>
+            <figcaption>
+              <h3>Customize individual sounds</h3>
+              <p>Open <strong>Typing Sound</strong>, <strong>Space Sound</strong>, or <strong>Shift Sound</strong> to pick a recording. Choose <strong>Pack Default</strong> to restore the pack’s sound.</p>
+            </figcaption>
+            <Image src="/setup/space-sound-menu.png" alt="Space Sound submenu with Pack Default and individual recordings" width={818} height={1098} />
+          </figure>
         </div>
       </section>
     </main>

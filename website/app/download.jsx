@@ -1,53 +1,51 @@
 'use client';
 
 import { Check, Copy } from 'lucide-react';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
-const installCommand = 'brew install --cask ankitvashisht12/tap/macing';
+const installCommand = 'brew install --formula ankitvashisht12/tap/macing && macing';
 
-export default function Download() {
-  const installHelp = useRef(null);
+export function HomebrewCommand() {
   const [copyStatus, setCopyStatus] = useState('');
+  const copyReset = useRef(null);
+
+  useEffect(() => () => clearTimeout(copyReset.current), []);
 
   async function copyCommand() {
     try {
       await navigator.clipboard.writeText(installCommand);
+      clearTimeout(copyReset.current);
       setCopyStatus('Copied');
+      copyReset.current = setTimeout(() => setCopyStatus(''), 2500);
     } catch {
+      clearTimeout(copyReset.current);
       setCopyStatus('Select the command and copy it manually.');
     }
   }
 
-  function showInstallHelp() {
-    installHelp.current.open = true;
-  }
+  return (
+    <div className="brew-install">
+      <div className="brew-command">
+        <code>{installCommand}</code>
+        <button type="button" onClick={copyCommand} aria-label="Copy Homebrew command" title="Copy Homebrew command">
+          {copyStatus === 'Copied' ? <Check size={18} aria-hidden="true" /> : <Copy size={18} aria-hidden="true" />}
+        </button>
+      </div>
+      <span className={copyStatus ? 'copy-status' : 'visually-hidden'} role="status">{copyStatus}</span>
+    </div>
+  );
+}
 
+export default function Download() {
   return (
     <>
-      <div className="hero-actions">
-        <a className="download-link" href="/Macing.dmg" download onClick={showInstallHelp}>
-          Download for Mac
-        </a>
-        <a className="sounds-link" href="#sounds">Try the sounds</a>
-      </div>
-      <div className="brew-install">
-        <div className="brew-command">
-          <code>{installCommand}</code>
-          <button type="button" onClick={copyCommand} aria-label="Copy Homebrew command" title="Copy Homebrew command">
-            {copyStatus === 'Copied' ? <Check size={18} aria-hidden="true" /> : <Copy size={18} aria-hidden="true" />}
-          </button>
-        </div>
-        <span className={copyStatus ? 'copy-status' : 'visually-hidden'} role="status">{copyStatus}</span>
-      </div>
+      <HomebrewCommand />
       <p className="download-note">macOS 13 or later · Apple silicon and Intel</p>
-      <a className="issue-link" href="#facing-an-issue">Facing an issue?</a>
-      <details className="install-help" ref={installHelp}>
-        <summary>Install and open Macing</summary>
-        <ol>
-          <li>Open the DMG and drag Macing into <strong>Applications</strong>.</li>
-          <li>Open Macing from Applications. If macOS blocks it, <a href="#facing-an-issue">see the first-launch steps</a>.</li>
-        </ol>
-      </details>
+      <div className="installation-links">
+        <a href="#installation">Installation steps</a>
+        <span aria-hidden="true"> · </span>
+        <a href="#configure-sounds">Configure</a>
+      </div>
     </>
   );
 }

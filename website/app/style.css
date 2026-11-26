@@ -7,8 +7,6 @@
   --orange: #a7370c;
   --dark: #2a2724;
   --code-surface: #eee4d4;
-  --button-fill: #a7370c;
-  --button-hover: #8c2c09;
 }
 :root[data-theme="dark"] {
   color-scheme: dark;
@@ -45,6 +43,8 @@ nav a:hover { text-decoration: underline; }
 .github-link { border: 1px solid var(--line); border-radius: .5rem; padding: .55rem .8rem; font-weight: 650; }
 .github-link:hover { border-color: var(--orange); color: var(--orange); text-decoration: none; }
 .hero { text-align: center; padding: clamp(3rem, 8vw, 7rem) 0; }
+.hero-badge { display: inline-flex; margin-bottom: 1rem; padding: .4rem .75rem; border: 1px solid var(--line); border-radius: 999px; color: var(--orange); font-size: .875rem; font-weight: 650; text-decoration: none; }
+.hero-badge:hover { border-color: var(--orange); }
 h1, h2 { margin: 0; line-height: 1.03; letter-spacing: -.04em; text-wrap: balance; }
 h1 { font-size: clamp(2.4rem, 7.25vw, 6rem); }
 .hero-line { display: block; }
@@ -55,39 +55,49 @@ h1 { font-size: clamp(2.4rem, 7.25vw, 6rem); }
 h2 { font-size: clamp(2rem, 4vw, 3.5rem); }
 p { color: var(--muted); font-size: 1.08rem; line-height: 1.6; margin: 1rem 0; }
 .hero p { max-width: 55ch; margin: 1.5rem auto 0; text-wrap: pretty; }
-.hero-actions { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: .85rem 1.2rem; margin-top: 1.75rem; }
-.download-link { display: inline-flex; align-items: center; min-height: 44px; padding: .65rem 1.1rem; border-radius: .5rem; background: var(--button-fill); color: #fff9f0; font-weight: 650; text-decoration: none; }
-.download-link:hover { background: var(--button-hover); }
-.sounds-link { font-weight: 650; }
 .brew-install { width: fit-content; max-width: 100%; margin: 1rem auto 0; }
 .brew-command { display: flex; align-items: center; gap: .5rem; padding-inline-start: .8rem; border: 1px solid var(--line); border-radius: .5rem; background: var(--code-surface); text-align: left; }
-.brew-command code { font-family: var(--font-geist-mono), monospace; font-size: .85rem; overflow-wrap: anywhere; }
+.brew-command code { min-width: 0; overflow-x: auto; white-space: nowrap; font-family: var(--font-geist-mono), monospace; font-size: .85rem; }
 .brew-command button { display: grid; place-items: center; flex: 0 0 44px; min-height: 44px; padding: 0; color: inherit; background: transparent; border: 0; border-inline-start: 1px solid var(--line); border-radius: 0 .5rem .5rem 0; cursor: pointer; }
 .brew-command button:hover { color: var(--orange); }
 .copy-status { display: block; margin-top: .35rem; color: var(--muted); font-size: .8rem; }
 
 .hero .download-note { margin-top: .75rem; font-size: .85rem; }
-.issue-link { display: inline-block; margin-top: .55rem; color: var(--orange); font-size: .9rem; font-weight: 650; }
-.install-help { width: fit-content; max-width: min(100%, 54ch); margin: .8rem auto 0; font-size: .9rem; line-height: 1.55; }
-.install-help summary { cursor: pointer; font-weight: 650; }
-.install-help[open] { padding: .9rem 1rem; border: 1px solid var(--line); border-radius: .5rem; text-align: left; }
-.install-help ol { margin: .65rem 0; padding-inline-start: 1.35rem; color: var(--muted); }
-.install-help li + li { margin-top: .35rem; }
-.settings-link { display: inline-flex; align-items: center; min-height: 44px; color: var(--orange); font-weight: 650; }
-.demo, .story, .issue-help { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; scroll-margin-top: 1rem; }
+.installation-links { margin-top: .55rem; color: var(--orange); font-size: .9rem; font-weight: 650; }
+.demo, .story { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; scroll-margin-top: 1rem; }
+.setup-steps { display: grid; grid-template-columns: 1fr 1fr .65fr; gap: 1.5rem; margin: 1.25rem 0 0; padding-inline-start: 1.4rem; }
+.setup-steps li::marker { color: var(--orange); font-weight: 700; }
+.setup-steps p { margin: 0 0 .65rem; font-size: .95rem; }
+.setup-steps img { display: block; width: 100%; height: auto; border-radius: .5rem; }
+@media (max-width: 700px) {
+  .setup-steps { grid-template-columns: 1fr; }
+  .setup-steps img { width: auto; max-width: 100%; }
+}
 .story { align-items: start; border-top: 1px solid var(--line); padding: clamp(2rem, 5vw, 4rem) 0; }
 .story p { max-width: 54ch; }
 .story p:first-child { margin-top: 0; }
 .story p:last-child { margin-bottom: 0; }
 .demo { background: var(--dark); color: #fff3df; border-radius: 16px; padding: clamp(1.5rem, 5vw, 4rem); }
-.issue-help { padding-top: clamp(2rem, 5vw, 4rem); }
-.issue-help h2 { scroll-margin-top: 1.5rem; }
-.issue-help p { max-width: 55ch; }
-.issue-help h3 { margin: 0; font-size: 1.2rem; }
-.issue-options > div + div { border-top: 1px solid var(--line); margin-top: 1rem; padding-top: 1.25rem; }
-.issue-help ol { margin: .65rem 0 0; padding-inline-start: 1.35rem; color: var(--muted); line-height: 1.6; }
-.issue-help li + li { margin-top: .35rem; }
-.issue-help pre { margin-bottom: 0; padding: .75rem 1rem; overflow: auto; background: var(--code-surface); border-radius: .5rem; line-height: 1.55; font-family: var(--font-geist-mono), monospace; }
+.installation { padding-top: clamp(2rem, 5vw, 4rem); }
+.installation h2, .installation h4 { scroll-margin-top: 1.5rem; }
+.installation h3 { margin: 0; font-size: 1.35rem; }
+.installation h4 { margin: 1.75rem 0 0; font-size: 1.1rem; }
+.installation p { max-width: 68ch; }
+.installation .brew-install { margin-inline: 0; }
+.install-method { margin-top: 1.5rem; }
+.install-method + .install-method { border-top: 1px solid var(--line); padding-top: 1.5rem; }
+.installation pre { margin-bottom: 0; padding: .75rem 1rem; overflow: auto; background: var(--code-surface); border-radius: .5rem; line-height: 1.55; font-family: var(--font-geist-mono), monospace; }
+.configure-sounds { border-top: 1px solid var(--line); margin-top: clamp(2rem, 5vw, 4rem); padding-top: clamp(2rem, 5vw, 4rem); }
+.configure-sounds h2 { scroll-margin-top: 1.5rem; }
+.sound-settings { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.5rem, 4vw, 3rem); margin-top: 1.5rem; }
+.sound-settings figure { display: grid; grid-template-rows: subgrid; grid-row: span 2; gap: .85rem; margin: 0; }
+.sound-settings h3 { margin: 0; font-size: 1.2rem; }
+.sound-settings p { margin: .5rem 0 0; }
+.sound-settings img { display: block; max-width: min(100%, 408px); height: auto; border-radius: .5rem; }
+@media (max-width: 700px) {
+  .sound-settings { grid-template-columns: 1fr; }
+  .sound-settings figure { grid-template-rows: auto auto; grid-row: auto; }
+}
 main { padding-bottom: clamp(3rem, 8vw, 6rem); }
 .demo p { color: #dec9b4; }
 .controls { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: .75rem 1rem; font-family: var(--font-geist-mono), monospace; }
@@ -98,7 +108,7 @@ select { min-width: 0; color: #fff3df; background: #38322c; border: 1px solid #8
 .keys button:active { transform: translateY(3px); background: #ffaf70; }
 footer { border-top: 1px solid var(--line); font-size: .82rem; }
 @media (max-width: 700px) {
-  .demo, .story, .issue-help { grid-template-columns: 1fr; gap: .75rem; }
+  .demo, .story { grid-template-columns: 1fr; gap: .75rem; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
