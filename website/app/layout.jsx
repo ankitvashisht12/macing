@@ -1,3 +1,4 @@
+import Script from 'next/script';
 import { GeistSans } from 'geist/font/sans';
 import { GeistMono } from 'geist/font/mono';
 import './style.css';
@@ -8,6 +9,24 @@ export const metadata = {
   icons: { icon: '/macing-logo.png' },
 };
 
+const initializeTheme = `
+  (() => {
+    let theme;
+    try { theme = localStorage.getItem('macing-theme'); } catch {}
+    if (theme !== 'light' && theme !== 'dark') {
+      theme = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+    document.documentElement.dataset.theme = theme;
+  })();
+`;
+
 export default function Layout({ children }) {
-  return <html lang="en" className={GeistSans.variable + ' ' + GeistMono.variable}><body>{children}</body></html>;
+  return (
+    <html lang="en" className={GeistSans.variable + ' ' + GeistMono.variable} suppressHydrationWarning>
+      <body>
+        <Script id="macing-theme" strategy="beforeInteractive">{initializeTheme}</Script>
+        {children}
+      </body>
+    </html>
+  );
 }

@@ -1,4 +1,6 @@
 import Image from 'next/image';
+import { Github, Volume2 } from 'lucide-react';
+import ThemeToggle from './theme-toggle';
 import Demo from './demo';
 import Download from './download';
 
@@ -10,8 +12,9 @@ export default function Home() {
         Macing
       </a>
       <nav aria-label="Main navigation">
-        <a href="#sounds">Sounds</a>
-        <a className="github-link" href="https://github.com/ankitvashisht12/macing">GitHub</a>
+        <a href="#sounds"><Volume2 size={18} aria-hidden="true" /><span className="nav-label">Sounds</span></a>
+        <a className="github-link" href="https://github.com/ankitvashisht12/macing"><Github size={18} aria-hidden="true" /><span className="nav-label">GitHub</span></a>
+        <ThemeToggle />
       </nav>
     </header>
     <main>
